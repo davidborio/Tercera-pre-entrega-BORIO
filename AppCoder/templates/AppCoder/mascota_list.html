@@ -1,0 +1,27 @@
+{%extends 'AppCoder/base.html'%}
+
+{% block title %}Lista de Mascotas{% endblock %}
+
+{% block titulo %} LISTA DE MASCOTAS: {% endblock %}
+
+{% block listado %} 
+
+
+
+<form> <!-- No le pone metodo in action porque en este caso toma por defecto method GET y action a la misma pagina-->
+    <p>
+        <label for="id_criterio_especie">Criterio:</label>
+        <input type="text" name="criterio_especie" maxlength="20" required="" id="id_criterio_especie">
+            
+      </p>
+</form>
+    
+
+<ul>
+    {%  for mascota in mascotas %}
+        <li>{{mascota}}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

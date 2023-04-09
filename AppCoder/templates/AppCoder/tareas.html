@@ -1,0 +1,15 @@
+{% extends 'AppCoder/base.html'%}
+
+{% block title %}Lista de Tareas{% endblock %}
+
+{% block titulo %} LISTA DE TAREAS: {% endblock %}
+
+{% block listado %} 
+
+<ul>
+    {%  for tarea in tareas %}
+        <li>{{ tarea.nombre }} - {{ tarea.creado_el }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
