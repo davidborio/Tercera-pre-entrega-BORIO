@@ -1,8 +1,8 @@
 from django.db import models 
 
 class Tarea(models.Model):
-    nombre = models.TextField(max_length=100)
-    estado = models.TextField(max_length=100,default="por_hacer")
+    nombre = models.CharField(max_length=100)
+    estado = models.CharField(max_length=100,default="por_hacer")
     creado_el = models.DateTimeField(auto_now_add=True)
     modificado_el = models.DateTimeField(auto_now=True)
 

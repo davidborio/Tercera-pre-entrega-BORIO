@@ -1,12 +1,38 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from AppCoder.models import Tarea,Persona,Mascota
-from AppCoder.forms import PersonaForm, MascotaForm
+from AppCoder.forms import PersonaForm, MascotaForm, TareaForm
 from django.views.generic import ListView
-from AppCoder.forms import BuscarPersonasForm, BuscarMascotasForm
+from AppCoder.forms import BuscarPersonasForm, BuscarMascotasForm, BuscarTareaForm
     
-def mostrar_mis_tareas(request, criterio):
-    tareas = Tarea.objects.filter(nombre=criterio).all()
+def crear_tarea(request):
+     form=TareaForm(request.POST)
+     context = {
+        "form":form
+        } 
+     if form.is_valid():
+          nueva_tarea=form.save()
+          form=TareaForm()
+
+     context["tareas"] = Tarea.objects.all()
+     context["total_tareas"] = len(Tarea.objects.all()) 
+    
+     return render(request, "AppCoder/tareas.html",context)
+
+class BuscarTarea(ListView):
+    model = Tarea
+    context_object_name = "tareas"
+
+    def get_queryset(self):
+        f = BuscarTareaForm(self.request.GET)
+        if f.is_valid():
+                return Tarea.objects.filter(nombre__icontains= f.data["criterio_nombre"]).all() #__icontains filtra todas las palabras que contengan la cadena ingresada en nombre
+
+        return Tarea.objects.none()
+
+
+def mostrar_mis_tareas(request):
+    tareas = Tarea.objects.all()
 
     return render(request, "AppCoder/tareas.html", {"tareas": tareas})
 
@@ -90,4 +116,15 @@ class BuscarMascotas(ListView):
                 return Mascota.objects.filter(nombre__icontains= f.data["criterio_especie"]).all() #__icontains filtra todas las palabras que contengan la cadena ingresada en nombre
 
         return Mascota.objects.none() #si no se encontró
+
+
+
+
+
+
+
 # Create your views here.
+
+
+
+

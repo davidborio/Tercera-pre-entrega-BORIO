@@ -20,4 +20,15 @@ class MascotaForm(forms.Form):
 class BuscarMascotasForm(forms.Form):
     criterio_especie = forms.CharField(max_length=20)
 
+class TareaForm(forms.Form):
+    nombre = forms.CharField(max_length=100)
+    estado = forms.CharField(max_length=100)
+    creado_el = forms.DateTimeField()
+    modificado_el = forms.DateTimeField()
+
+class BuscarTareaForm(forms.Form):
+    criterio_nombre = forms.CharField(max_length=100)
+
+
+
 

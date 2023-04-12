@@ -16,16 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import ListView
-from AppCoder.views import mostrar_mis_tareas, mostrar_mascotas,mostrar_personas, crear_persona, BuscarPersonas,crear_mascota, BuscarMascotas
+from AppCoder.views import   BuscarTarea, mostrar_mis_tareas, mostrar_mascotas,mostrar_personas, crear_persona, BuscarPersonas,crear_mascota, BuscarMascotas,crear_tarea
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mis-tareas/<criterio>', mostrar_mis_tareas, name="mis-tareas"),
+    
+    path('tareas/crear', crear_tarea, name="tareas-crear"),
     path('personas', mostrar_personas, name="personas"),
     path('personas/crear', crear_persona, name="personas-crear"),
     path("personas/list", BuscarPersonas.as_view(), name="personas-list"), #as_view es un metodo de clase que convierte una class based vire en una function based view ya que path necesita una funcion yse leesta dando una clase.
     path("mascotas/crear", crear_mascota, name="mascotas-crear"),
     path('mascotas', mostrar_mascotas,name="mascotas"),
-    path("mascotas/list", BuscarMascotas.as_view(), name="mascotas-list")
+    path("mascotas/list", BuscarMascotas.as_view(), name="mascotas-list"),
+    path("tareas/list", BuscarTarea.as_view(), name="tareas-list")
+    
+ 
 ]

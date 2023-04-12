@@ -1,4 +1,4 @@
-{% extends 'AppCoder/base.html'%}
+{% extends 'AppCoder/base.html' %}
 
 {% block title %}Lista de Tareas{% endblock %}
 
@@ -6,9 +6,17 @@
 
 {% block listado %} 
 
+<form action= "{% url 'tareas-crear' %}" method="POST">
+
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="ponele">
+
+</form>
+
 <ul>
     {%  for tarea in tareas %}
-        <li>{{ tarea.nombre }} - {{ tarea.creado_el }}</li>
+        <li> {{ tarea }} </li>
     {% endfor %}
 </ul>
 
